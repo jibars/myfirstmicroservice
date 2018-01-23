@@ -1,0 +1,42 @@
+language: java
+
+branches:
+  only:
+    - master
+
+install:
+  - sudo start-docker-daemon
+
+jdk:
+  - oraclejdk8
+
+script:
+  - ./gradlew build check --stacktrace
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle/caches
+    - $HOME/.gradle/wrapper
+
+deploy:
+  provider: script
+  script: ./container_builder.sh
+  on:
+    branch: master
+
+after_success: reports-publisher
+after_failure: reports-publisher
+notifications:
+  webhooks: https://devhose.spt-engprod-pro.schibsted.io/devhose/travis
+
+env:
+  global:
+    - DOCKER_REGISTRY="containers.schibsted.io"
+    - DOCKER_IMAGE="${DOCKER_REGISTRY}/scmspain/myfirstproject"
+
+# Remember to activate travis, you can do it using travis cli: travis enable

@@ -1,0 +1,45 @@
+---
+bounded:    jibars 
+
+start_parameters: []
+
+gradle_output_folder: build/install/myfirstproject/
+
+pre:
+    deploy:
+        instance_type:    t2.micro
+        min_instances:    1
+        max_instances:    1
+        docker:
+            ports:
+                - "8000:8000"
+
+pro:
+    deploy:
+        instance_type:    m3.medium
+        min_instances:    2
+        max_instances:    5
+        docker:
+            ports:
+                - "8000:8000"
+        scaling_policies:
+            - adjustment_type:      ChangeInCapacity
+              adjustment:           1
+              namespace:            AWS/EC2
+              metric:               CPUUtilization
+              cooldown:             600
+              statistic:            Average
+              comparison_operator:  GreaterThanThreshold
+              threshold:            80
+              period:               60
+              evaluation_periods:   5
+            - adjustment_type:      ChangeInCapacity
+              adjustment:           -1
+              namespace:            AWS/EC2
+              metric:               CPUUtilization
+              cooldown:             600
+              statistic:            Average
+              comparison_operator:  LessThanThreshold
+              threshold:            50
+              period:               600
+              evaluation_periods:   4

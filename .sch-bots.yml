@@ -1,0 +1,5 @@
+# TricklerDowner is a bot that listens to GitHub push events and propagates internal library updates to downstream
+# projects in the form of Pull Requests that trigger CI.
+# Documentation at: https://confluence.schibsted.io/display/EP/TricklerDowner
+tricklerDowner:
+  enabled: true

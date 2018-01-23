@@ -1,0 +1,43 @@
+eureka:
+  instance:
+    preferIpAddress: false
+
+spring:
+  application:
+    name: myfirstproject
+  main:
+    banner-mode: "OFF"
+
+server:
+  port: 8000
+  compression:
+    enabled: true
+    mime-types: application/json
+
+#hystrix:
+#  command:
+#    MyService:
+#      getUsersFromAnotherService:
+#        execution:
+#          isolation:
+#            strategy: SEMAPHORE
+
+hystrix.command.default.execution.isolation.strategy: SEMAPHORE
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 800
+
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 2000
+  MaxAutoRetries: 1
+
+
+springfox.documentation.swagger.v2.path: /schema
+
+security:
+  user:
+    name: 'user-183u0l7hr482fdfmruvvg1mubv7j79c1abmdsdc8i8o1m08bnqnr'
+    password: 'change-me-hnidj7n48cfa5btka3rmnclhka1m0o974ln00cfd3ua6u55oain'
+
+management:
+  security:
+    roles: SUPERUSER

@@ -1,0 +1,124 @@
+group 'com.scmspain'
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/release" }
+    maven {
+        credentials {
+            username project.hasProperty('artifactory_user')? project.artifactory_user: System.env.ARTIFACTORY_USER
+            password project.hasProperty('artifactory_pwd')? project.artifactory_pwd: System.env.ARTIFACTORY_PWD
+        }
+
+        url "https://artifacts.schibsted.io/artifactory/libs-release"
+    }
+}
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+        springCloudBomVersion = 'Edgware.RELEASE'
+        feignVersion = '8.18.0'
+        logbackVersion = '1.2.3'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven {
+            url 'https://artifacts.schibsted.io/artifactory/plugins-release-local'
+            credentials {
+                username = project.hasProperty("artifactory_user") ?
+                        "$artifactory_user" : "$System.env.ARTIFACTORY_USER"
+                password = project.hasProperty("artifactory_pwd") ?
+                        "$artifactory_pwd" : "$System.env.ARTIFACTORY_PWD"
+            }
+        }
+
+        // packo dependency is expected to be downloaded and loaded from the following dir.
+        flatDir {
+            dirs "./build/dependencies"
+        }
+    }
+
+
+    dependencies {
+        classpath 'com.schibsted.engprod:schibsted-jvm-plugin:0.+',
+                'com.netflix.nebula:nebula-ospackage-plugin:3.+',
+                'com.schibsted.engprod.gradle:packo'
+
+        classpath group: "org.springframework.boot", name: "spring-boot-gradle-plugin", version: springBootVersion
+        classpath group: "gradle.plugin.com.gorylenko.gradle-git-properties", name: "gradle-git-properties", version: "1.4.16"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+apply from: 'build-application.gradle'
+apply from: 'build-git.gradle'
+apply plugin: 'schibsted.jvm-plugin'
+
+targetCompatibility = 1.8
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-starter-parent:${springCloudBomVersion}"
+    }
+
+    dependencies {
+        dependencySet(group: "com.netflix.feign", version: "${feignVersion}") {
+            entry 'feign-jaxrs'
+            entry 'feign-jackson'
+        }
+        dependency 'io.projectreactor:reactor-core:3.1.0.RELEASE'
+    }
+}
+
+dependencies {
+    // Spring dependencies
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    compile("org.springframework.cloud:spring-cloud-starter-feign")
+    compile("org.springframework.cloud:spring-cloud-starter-hystrix")
+    compile("org.springframework.boot:spring-boot-starter-security")
+
+    // Feign
+    compile("com.netflix.feign:feign-jaxrs")
+    compile("javax.inject:javax.inject:1")
+    compile("com.netflix.feign:feign-jackson")
+
+    // Logging
+    compile("ch.qos.logback:logback-classic:${logbackVersion}")
+    compile("ch.qos.logback:logback-core:${logbackVersion}")
+    compile("ch.qos.logback:logback-access:${logbackVersion}")
+    compile("net.rakugakibox.springbootext:spring-boot-ext-logback-access:1.2")
+
+    // Api docs
+    compile("io.springfox:springfox-swagger2:2.7.0")
+    compile("io.springfox:springfox-swagger-ui:2.7.0")
+
+    // Spring monitoring and tooling to inspect things at runtime
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+
+    // Jackson Java time support
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.4")
+
+    compile("com.schibsted.spain:spring-autoconfig-starter:0.1.16")
+
+    // Standard set of test tooling
+    testCompile("junit:junit")
+    testCompile("org.mockito:mockito-core:2.8.47")
+    testCompile("org.assertj:assertj-core:3.6.1")    
+    testCompile("com.github.tomakehurst:wiremock:1.57")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+bootRun.doFirst {
+    systemProperty "spring.profiles.active", "dev"
+}
+
+// This disables the repackage that spring boot does, which is not a fully standard jar
+bootRepackage {
+    enabled = false
+}

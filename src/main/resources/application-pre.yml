@@ -1,0 +1,11 @@
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    useDnsForFetchingServiceUrls: true
+    eurekaServerDNSName: ${CLOUD_EUREKA}
+    eurekaServerPort: 8080
+    eurekaServerURLContext: eureka-server/v2
+    region: ${EC2_REGION}
+
+cors.origin.swagger: http://swagger.global-pre.spain.schibsted.io
