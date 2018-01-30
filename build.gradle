@@ -1,3 +1,4 @@
+version '1.0-SNAPSHOT'
 group 'com.scmspain'
 
 repositories {
@@ -118,7 +119,8 @@ bootRun.doFirst {
     systemProperty "spring.profiles.active", "dev"
 }
 
-// This disables the repackage that spring boot does, which is not a fully standard jar
+// This enables or disables the repackage that spring boot does, which is not a fully standard jar
 bootRepackage {
     enabled = false
+    mainClass = 'com.schibsted.myfirstproject.framework.Application'
 }
