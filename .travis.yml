@@ -4,14 +4,12 @@ branches:
   only:
     - master
 
-before_install:
-    - sudo yum -y install docker-ee
-
-install:
-  - sudo start-docker-daemon
-
 jdk:
   - oraclejdk8
+
+install:
+  - /bin/true #Travis runs "./gradlew assemble" by default
+  - sudo start-docker-daemon
 
 script:
   - ./gradlew build check --stacktrace
