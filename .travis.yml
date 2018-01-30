@@ -7,11 +7,8 @@ branches:
 jdk:
   - oraclejdk8
 
-before_install:
-  - sudo rm /var/run/docker.pid
-
 install:
-  - sudo dockerd
+  - sudo docker -d
 
 script:
   - ./gradlew build check --stacktrace
