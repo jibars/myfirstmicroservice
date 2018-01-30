@@ -8,8 +8,7 @@ jdk:
   - oraclejdk8
 
 install:
-  - /bin/true #Travis runs "./gradlew assemble" by default
-  - sudo start-docker-daemon
+  - sudo dockerd
 
 script:
   - ./gradlew build check --stacktrace
