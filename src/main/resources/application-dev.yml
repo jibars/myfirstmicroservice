@@ -3,7 +3,7 @@ docker:
 
 eureka:
   client:
-      registerWithEureka: false
-      fetchRegistry: false
+      registerWithEureka: true
+      fetchRegistry: true
       serviceUrl:
-        defaultZone: http://${docker.host}:10000/eureka/v2/
+        defaultZone: http://${docker.host}:1111/eureka/
