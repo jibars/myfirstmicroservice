@@ -4,6 +4,9 @@ branches:
   only:
     - master
 
+before_install:
+    - sudo yum -y install docker-ee
+
 install:
   - sudo start-docker-daemon
 
