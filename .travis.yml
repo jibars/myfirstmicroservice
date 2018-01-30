@@ -7,6 +7,9 @@ branches:
 jdk:
   - oraclejdk8
 
+before_install:
+  - rm /var/run/docker.pid
+
 install:
   - sudo dockerd
 
