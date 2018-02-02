@@ -1,3 +1,5 @@
+sudo: required
+
 language: java
 
 branches:
@@ -7,8 +9,8 @@ branches:
 jdk:
   - oraclejdk8
 
-install:
-  - sudo service docker start
+services:
+  - docker
 
 script:
   - ./gradlew build check --stacktrace
