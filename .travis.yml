@@ -40,7 +40,7 @@ env:
   global:
     - DOCKER_REGISTRY="containers.schibsted.io"
     - DOCKER_IMAGE="${DOCKER_REGISTRY}/scmspain/myfirstproject"
-    - ARTIFACTORY_SCM_USER=usr_artifactory_merc
+    - ARTIFACTORY_USER=usr_artifactory_merc
     - secure: "oeLk4q+jLioBbKosADKnNK0yyfBbM8IvypFsktZg+v5aniIY9Z0eN8al+v0PXtH76nOCvwIN4wnMdHpmTbOa4SHK6SkJprZQ+h0lmdWk55UvdsA7ZAx4xJ/8B9Hnlex1m+wFvSATscrfQLxdkxJj5/BaqO7UHB7B4AvHhOsoKgsypblmY6JjeMkk0FrmySkCJ+Oa41mDXcEPA9xRB3FCjtaMdFQKRo5sjAzQYi+eUX14kSy46rhzLXYaxSpDLQPc2BotyKY4+UjMgzWmU0fp9LaGdAeQD5ok400P+Ze3biEpFSsFQ4DujRIpfuuyg86yEDn2XNy049Gqw4qEpTqT6IQfm2TyjezUX5AXUhxxMn6aL+IsZBV5MyKzyfurewGCPb6B6mA2cz468TAAL2O2QRuN6kg1knwCHASoLJ2TB0eXXdpajJTRLrnbqCaVPoHctKXNFo7Ya4oct9J0irUlr4vRrjrffS66Z7DDs3SrXC52KfsL6fn0CC2IozpfcVQ9BluYszhVtFPR8dortuAGe2+QYPK7w3ageJniu6Zn+2LFk/KtOtrnkhyUht0vtAgbtz4O83zusMQECOUOrsytMcLWZ6ztyLwj3l0brf03aPqLcx0+NWx3crWeNnHyw63pfC1Hn76HeVXoCKqtIOsUlrAmE77d8ge/3qlYvT9/RuQ=" # ARTIFACTORY_SCM_PASSWORD
 
 # Remember to activate travis, you can do it using travis cli: travis enable
