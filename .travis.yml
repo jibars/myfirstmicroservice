@@ -8,7 +8,7 @@ jdk:
   - oraclejdk8
 
 install:
-  - sudo start-docker-daemon
+  - sudo service docker start
 
 script:
   - ./gradlew build check --stacktrace
