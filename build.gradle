@@ -4,14 +4,6 @@ group 'com.scmspain'
 repositories {
     mavenCentral()
     maven { url "https://repo.spring.io/release" }
-    maven {
-        credentials {
-            username project.hasProperty('artifactory_user')? project.artifactory_user: System.env.ARTIFACTORY_USER
-            password project.hasProperty('artifactory_pwd')? project.artifactory_pwd: System.env.ARTIFACTORY_PASSWORD
-        }
-
-        url "https://artifacts.schibsted.io/artifactory/libs-release-ms"
-    }
 }
 
 buildscript {
@@ -24,15 +16,7 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
-        maven {
-            url 'https://artifacts.schibsted.io/artifactory/plugins-release-local'
-            credentials {
-                username = project.hasProperty("artifactory_user") ?
-                        "$artifactory_user" : "$System.env.ARTIFACTORY_USER"
-                password = project.hasProperty("artifactory_pwd") ?
-                        "$artifactory_pwd" : "$System.env.ARTIFACTORY_PASSWORD"
-            }
-        }
+
 
         // packo dependency is expected to be downloaded and loaded from the following dir.
         flatDir {
