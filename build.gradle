@@ -26,10 +26,6 @@ buildscript {
 
 
     dependencies {
-        classpath 'com.schibsted.engprod:schibsted-jvm-plugin:0.+',
-                'com.netflix.nebula:nebula-ospackage-plugin:3.+',
-                'com.schibsted.engprod.gradle:packo'
-
         classpath group: "org.springframework.boot", name: "spring-boot-gradle-plugin", version: springBootVersion
         classpath group: "gradle.plugin.com.gorylenko.gradle-git-properties", name: "gradle-git-properties", version: "1.4.16"
     }
@@ -42,7 +38,6 @@ apply plugin: 'org.springframework.boot'
 
 apply from: 'build-application.gradle'
 apply from: 'build-git.gradle'
-apply plugin: 'schibsted.jvm-plugin'
 
 targetCompatibility = 1.8
 
@@ -88,8 +83,6 @@ dependencies {
 
     // Jackson Java time support
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.4")
-
-    compile("com.schibsted.spain:spring-autoconfig-starter:0.1.16")
 
     // Standard set of test tooling
     testCompile("junit:junit")
