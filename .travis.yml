@@ -25,20 +25,20 @@ cache:
     - $HOME/.gradle/caches
     - $HOME/.gradle/wrapper
 
-deploy:
-  provider: script
-  script: ./container_builder.sh
-  on:
-    branch: master
-
-after_success: reports-publisher
-after_failure: reports-publisher
-notifications:
-  webhooks: https://devhose.spt-engprod-pro.schibsted.io/devhose/travis
-
-env:
-  global:
-    - DOCKER_REGISTRY="containers.schibsted.io"
-    - DOCKER_IMAGE="${DOCKER_REGISTRY}/scmspain/myfirstproject"
+#deploy:
+#  provider: script
+#  script: ./container_builder.sh
+#  on:
+#    branch: master
+#
+#after_success: reports-publisher
+#after_failure: reports-publisher
+#notifications:
+#  webhooks: https://devhose.spt-engprod-pro.schibsted.io/devhose/travis
+#
+#env:
+#  global:
+#    - DOCKER_REGISTRY="containers.schibsted.io"
+#    - DOCKER_IMAGE="${DOCKER_REGISTRY}/scmspain/myfirstproject"
 
 # Remember to activate travis, you can do it using travis cli: travis enable
