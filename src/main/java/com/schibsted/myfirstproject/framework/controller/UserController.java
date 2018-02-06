@@ -1,9 +1,9 @@
 package com.schibsted.myfirstproject.framework.controller;
 
 import com.schibsted.myfirstproject.framework.controller.exceptions.NotUserFoundException;
-import com.schibsted.myfirstproject.framework.model.Repository;
 import com.schibsted.myfirstproject.framework.model.User;
 import com.schibsted.myfirstproject.framework.model.UserDto;
+import com.schibsted.myfirstproject.framework.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +22,7 @@ import java.util.List;
 public class UserController {
 
   @Autowired
-  Repository repository;
+  UserRepository repository;
 
   @GetMapping()
   @ResponseStatus(HttpStatus.OK)
