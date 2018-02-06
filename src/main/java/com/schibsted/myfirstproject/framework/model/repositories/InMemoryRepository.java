@@ -1,12 +1,13 @@
-package com.schibsted.myfirstproject.framework.model;
+package com.schibsted.myfirstproject.framework.model.repositories;
 
+import com.schibsted.myfirstproject.framework.model.User;
 import com.schibsted.myfirstproject.framework.model.exceptions.NotUserException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class InMemoryRepository implements Repository {
+public class InMemoryRepository implements UserRepository {
   private List<User> users = new ArrayList<>();
 
   @Override

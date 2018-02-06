@@ -1,7 +1,7 @@
 package com.schibsted.myfirstproject.framework.configuration;
 
-import com.schibsted.myfirstproject.framework.model.InMemoryRepository;
-import com.schibsted.myfirstproject.framework.model.Repository;
+import com.schibsted.myfirstproject.framework.model.repositories.InMemoryRepository;
+import com.schibsted.myfirstproject.framework.model.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class RepositoryConfiguration {
 
   @Bean
-  Repository localRepository() {
+  UserRepository localRepository() {
     return new InMemoryRepository();
   }
 }
